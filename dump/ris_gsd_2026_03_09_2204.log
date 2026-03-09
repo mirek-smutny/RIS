@@ -1,0 +1,93 @@
+;;; 
+Export: Release 19.0.0.0.0 - Production on Mon Mar 9 22:04:27 2026
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+;;; 
+Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Starting "SYS"."SYS_EXPORT_SCHEMA_01":  userid="SYS/********@DMAN01 AS SYSDBA" directory=DMPDIR dumpfile=ris_gsd_2026_03_06_part_%U.dmp filesize=50M parallel=2 logfile=ris_gsd_2026_03_09_2204.log schemas=GSD,RIS 
+Processing object type SCHEMA_EXPORT/USER
+Processing object type SCHEMA_EXPORT/SYSTEM_GRANT
+Processing object type SCHEMA_EXPORT/ROLE_GRANT
+Processing object type SCHEMA_EXPORT/DEFAULT_ROLE
+Processing object type SCHEMA_EXPORT/TABLESPACE_QUOTA
+Processing object type SCHEMA_EXPORT/PRE_SCHEMA/PROCACT_SCHEMA
+Processing object type SCHEMA_EXPORT/PACKAGE/PACKAGE_BODY
+Processing object type SCHEMA_EXPORT/TABLE/INDEX/STATISTICS/INDEX_STATISTICS
+Processing object type SCHEMA_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
+Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA
+Processing object type SCHEMA_EXPORT/SEQUENCE/SEQUENCE
+Processing object type SCHEMA_EXPORT/STATISTICS/MARKER
+Processing object type SCHEMA_EXPORT/TABLE/TABLE
+Processing object type SCHEMA_EXPORT/TABLE/GRANT/OWNER_GRANT/OBJECT_GRANT
+Processing object type SCHEMA_EXPORT/TABLE/COMMENT
+Processing object type SCHEMA_EXPORT/PACKAGE/PACKAGE_SPEC
+Processing object type SCHEMA_EXPORT/PACKAGE/GRANT/OWNER_GRANT/OBJECT_GRANT
+Processing object type SCHEMA_EXPORT/PROCEDURE/PROCEDURE
+Processing object type SCHEMA_EXPORT/PACKAGE/COMPILE_PACKAGE/PACKAGE_SPEC/ALTER_PACKAGE_SPEC
+Processing object type SCHEMA_EXPORT/PROCEDURE/ALTER_PROCEDURE
+Processing object type SCHEMA_EXPORT/VIEW/VIEW
+Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
+Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/REF_CONSTRAINT
+Processing object type SCHEMA_EXPORT/TABLE/TRIGGER
+Processing object type SCHEMA_EXPORT/TABLE/INDEX/INDEX
+Processing object type SCHEMA_EXPORT/MATERIALIZED_VIEW
+Processing object type SCHEMA_EXPORT/POST_SCHEMA/PROCOBJ
+. . exported "GSD"."G_ORGANIZATION"                      200.6 MB 4493707 rows
+. . exported "RIS"."R_CV_EDU_HIST"                       161.3 MB 2745436 rows
+. . exported "RIS"."R_WORKER"                            116.0 MB 1251909 rows
+. . exported "RIS"."R_CV"                                60.97 MB 1155855 rows
+. . exported "GSD"."G_M_NAME_BY_ORG_MV"                  59.84 MB 1526769 rows
+. . exported "RIS"."R_CV_JOB_HIST"                       48.90 MB  925410 rows
+. . exported "GSD"."G_W_NAME_BY_ORG_MV"                  42.17 MB 1004924 rows
+. . exported "RIS"."R_CV_JOB_REFERENCE"                  30.68 MB  259518 rows
+. . exported "GSD"."SAMPLE_WOMEN_SURNAME"                1.965 MB   65033 rows
+. . exported "GSD"."G_COMPANY_INDUSTRY"                  1.913 MB  154089 rows
+. . exported "GSD"."SAMPLE_MEN_SURNAME"                  1.528 MB   61365 rows
+. . exported "RIS"."R_COMPANY"                           31.96 MB  528716 rows
+. . exported "GSD"."G_TOFI"                              568.2 KB   26657 rows
+. . exported "GSD"."SAMPLE_MEN_NAME"                     452.6 KB   18813 rows
+. . exported "GSD"."SAMPLE_WOMEN_NAME"                   392.4 KB   16505 rows
+. . exported "GSD"."G_EDU_ORG_FIELD"                     287.2 KB   21521 rows
+. . exported "RIS"."R_EDU_ORG"                           217.6 KB    2248 rows
+. . exported "GSD"."G_RIS_COUNT"                         149.5 KB    4005 rows
+. . exported "GSD"."G_EDU_TYPES"                         40.47 KB    2821 rows
+. . exported "GSD"."G_EDU_FIELD_TYPE"                    27.60 KB     495 rows
+. . exported "GSD"."G_RULES"                             20.28 KB     262 rows
+. . exported "GSD"."G_INDUSTRY_POSITION"                 17.31 KB     740 rows
+. . exported "GSD"."G_JOB_POSITION"                      15.67 KB     253 rows
+. . exported "GSD"."G_JOB_INDUSTRY"                      9.304 KB      47 rows
+. . exported "GSD"."G_TITLE"                             8.906 KB      30 rows
+. . exported "GSD"."G_EDU_ORG_TYPE"                      7.820 KB      11 rows
+. . exported "GSD"."G_LANGUAGE"                          7.414 KB      21 rows
+. . exported "GSD"."G_EVALUATION"                        7.203 KB       7 rows
+. . exported "GSD"."G_WORKER_STATUS"                     7.109 KB       4 rows
+. . exported "GSD"."G_COMPANY_TYPE"                      7.062 KB       6 rows
+. . exported "GSD"."G_JOB_TYPE"                          6.921 KB       3 rows
+. . exported "GSD"."G_RULE_TYPES"                        6.304 KB      48 rows
+. . exported "GSD"."G_SKILL_POSITION"                        0 KB       0 rows
+. . exported "RIS"."R_CV_SKILLS"                             0 KB       0 rows
+. . exported "RIS"."R_CV_SKILL_REFERENCE"                    0 KB       0 rows
+. . exported "RIS"."R_JOB_ANSWER"                            0 KB       0 rows
+. . exported "RIS"."R_JOB_OFFER"                             0 KB       0 rows
+Master table "SYS"."SYS_EXPORT_SCHEMA_01" successfully loaded/unloaded
+******************************************************************************
+Dump file set for SYS.SYS_EXPORT_SCHEMA_01 is:
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_01.dmp
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_02.dmp
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_03.dmp
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_04.dmp
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_05.dmp
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_06.dmp
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_07.dmp
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_08.dmp
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_09.dmp
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_10.dmp
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_11.dmp
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_12.dmp
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_13.dmp
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_14.dmp
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_15.dmp
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_16.dmp
+  /mnt/repository/DEV/RIS/dump/ris_gsd_2026_03_06_part_17.dmp
+Job "SYS"."SYS_EXPORT_SCHEMA_01" successfully completed at Mon Mar 9 22:19:20 2026 elapsed 0 00:14:30

@@ -1,0 +1,45 @@
+--create tablespace GSD_DATA datafile '/ora_data00/ORADB01C/DMAN01/DMAN01_GSD_DATA_001.dbf' size 128m autoextend on next 128m maxsize 1024m;
+--create tablespace GSD_INDEX datafile '/ora_data00/ORADB01C/DMAN01/DMAN01_GSD_INDEX_001.dbf' size 128m autoextend on next 128m maxsize 1024m;
+--create tablespace RIS_DATA datafile '/ora_data00/ORADB01C/DMAN01/DMAN01_RIS_DATA_001.dbf' size 128m autoextend on next 128m maxsize 1024m;
+--create tablespace RIS_INDEX datafile '/ora_data00/ORADB01C/DMAN01/DMAN01_RIS_INDEX_001.dbf' size 128m autoextend on next 128m maxsize 1024m;
+
+--create role ROLE_GSD_RO;
+--create role ROLE_GSD_EX;
+--create role ROLE_SAMLE_RO;
+
+CREATE USER GSD IDENTIFIED BY abcdefg
+DEFAULT TABLESPACE GSD_DATA
+TEMPORARY TABLESPACE TEMP
+QUOTA UNLIMITED ON GSD_DATA;
+
+GRANT CONNECT TO GSD;
+GRANT CREATE TABLE TO GSD;
+GRANT CREATE TRIGGER TO GSD;
+GRANT CREATE SEQUENCE TO GSD;
+GRANT CREATE PROCEDURE TO GSD;
+
+ALTER USER GSD QUOTA UNLIMITED ON GSD_INDEX;
+
+CREATE USER RIS IDENTIFIED BY abcdefg
+DEFAULT TABLESPACE RIS_DATA
+TEMPORARY TABLESPACE TEMP
+QUOTA UNLIMITED ON RIS_DATA;
+
+ALTER USER RIS QUOTA UNLIMITED ON RIS_INDEX;
+
+GRANT CONNECT TO RIS;
+GRANT CREATE TABLE TO RIS;
+GRANT CREATE TRIGGER TO RIS;
+GRANT CREATE SEQUENCE TO RIS;
+GRANT CREATE PROCEDURE TO RIS;
+GRANT EXECUTE ON DBMS_LOCK TO RIS;
+
+grant execute on dbms_scheduler to GSD;
+grant execute on dbms_scheduler to RIS;
+
+grant select on dba_tables to GSD;
+
+grant create job to GSD;
+grant create job to RIS;
+
+grant create materialized view to GSD;

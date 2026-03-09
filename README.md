@@ -7,16 +7,19 @@ Including in the files are dumps with already generated records to minimalize vi
 These supportive packages were not part of the theme of the DT so it was omitted from the actual DT.
 
 Install:
+
 	- run install.sql
 	- import data from input_tables directory
 	- run install2.sql
 
 Import (prefered option):
+
 	- prepare directory
 	- prepare tablespaces from the prereq.sql
 	- run import - imp_ris_gsd.sh
 	
 Details:
+
 	- file 019_RIS_views.sql is filled with prepared views for the diploma thesis practical section, named from chapter 4.4.1. Due to page size restrictions, DT only optimized A1 query.
 	- when running import option, jobs are not required to be enabled, base data are present
 	- G_TOFI is table with different logical combinations of degrees, education organization, field type and industry positions. It is used to generate different employees profiles

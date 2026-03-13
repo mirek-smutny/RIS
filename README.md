@@ -11,6 +11,7 @@ Install:
 	- run install.sql
 	- import data from input_tables directory
 	- run install2.sql
+	- run changes/issue_1/install.sql - add logging and simplifies main worker records generation (removed gender based procedures)
 
 Import (prefered option):
 

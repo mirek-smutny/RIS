@@ -189,12 +189,6 @@ BEGIN
         END IF;
 
         -- Insert into R_WORKER
-        DBMS_OUTPUT.PUT_LINE('Sample name: ' || name_rnd || ' ' || surname_rnd  );
-        DBMS_OUTPUT.PUT_LINE('Sample email: ' || email_gen);
-        DBMS_OUTPUT.PUT_LINE('Sample DOB: ' || con_date || ' Age: ' || int_age);
-        DBMS_OUTPUT.PUT_LINE('VÃ¡Å¾enÃ½ pane ' || name_v || ' ' || surname_v);
-        DBMS_OUTPUT.PUT_LINE('PohlavÃ­: M');
-        DBMS_OUTPUT.PUT_LINE('TOFI: ' || tofi_rnd);
         --R_INS_WORKER_SP(i_name VARCHAR, i_surname VARCHAR, i_v_name VARCHAR, i_v_surname VARCHAR, i_dob DATE, i_email VARCHAR, i_mf VARCHAR, i_ws NUMBER, i_regdate DATE, i_tofi NUMBER)
         R_INS_RIS_PCK.SP_WORKER(name_rnd, surname_rnd, name_v, surname_v, con_date, email_gen, 'M', 1, SYSDATE, tofi_rnd);
     END LOOP;
@@ -352,12 +346,6 @@ BEGIN
         END IF;
 
         -- Insert into R_WORKER
-        DBMS_OUTPUT.PUT_LINE('Sample name: ' || name_rnd || ' ' || surname_rnd  );
-        DBMS_OUTPUT.PUT_LINE('Sample email: ' || email_gen);
-        DBMS_OUTPUT.PUT_LINE('Sample DOB: ' || con_date || ' Age: ' || int_age);
-        DBMS_OUTPUT.PUT_LINE('VÃ¡Å¾enÃ½ pane ' || name_v || ' ' || surname_v);
-        DBMS_OUTPUT.PUT_LINE('PohlavÃ­: M');
-        DBMS_OUTPUT.PUT_LINE('TOFI: ' || tofi_rnd);
         --R_INS_WORKER_SP(i_name VARCHAR, i_surname VARCHAR, i_v_name VARCHAR, i_v_surname VARCHAR, i_dob DATE, i_email VARCHAR, i_mf VARCHAR, i_ws NUMBER, i_regdate DATE, i_tofi NUMBER)
         R_INS_RIS_PCK.SP_WORKER(name_rnd, surname_rnd, name_v, surname_v, con_date, email_gen, 'F', 1, SYSDATE, tofi_rnd);
     END LOOP;

@@ -1,0 +1,75 @@
+##############################################################
+################## R_LOG Structures ##########################
+##############################################################
+###### - Referential Information System - ####################
+############### - CREATE TABLE - #############################
+################# - R_LOG - ##################################
+CONSTRAINT R_LG_ID_LOG_PK PRIMARY KEY (ID_LOG) USING INDEX (CREATE INDEX R_LG_ID_LOG_PK_IDX ON R_LOG (ID_LOG) TABLESPACE RIS_INDEX)
+                                                                                                     *
+ERROR at line 8:
+ORA-00903: invalid table name 
+
+
+
+Comment created.
+
+COMMENT ON TABLE RIS.R_LOG IS 'Logging'
+                     *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+COMMENT ON COLUMN RIS.R_LOG.ID_LOG IS 'PK - Log ID'
+                      *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+COMMENT ON COLUMN RIS.R_LOG.LOG_TIME IS 'Timestamp'
+                      *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+COMMENT ON COLUMN RIS.R_LOG.MODULE IS 'Package which wrote the log'
+                      *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+COMMENT ON COLUMN RIS.R_LOG.OPERATION IS 'Exact operation'
+                      *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+COMMENT ON COLUMN RIS.R_LOG.STATUS IS 'Status of current operation'
+                      *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+
+Warning: Procedure created with compilation errors.
+
+################## R_GEN_CV ##################################
+
+Package created.
+
+
+Warning: Package Body created with compilation errors.
+
+################## R_GEN_CV_ITEM #############################
+
+Package created.
+
+
+Warning: Package Body created with compilation errors.
+
+################## R_GEN_WR_BY_ORG_PCK #######################
+
+Package created.
+
+
+Warning: Package Body created with compilation errors.
+

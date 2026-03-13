@@ -482,6 +482,7 @@ BEGIN
 				R_LOG_SP(v_module, v_operation, v_status);
 				
 			SAVEPOINT start_gen;
+			<<CJH_START>>
 			
 			v_operation := 'wrcv_rec';
 			v_status := 'Start';
@@ -717,6 +718,7 @@ BEGIN
 							
 							v_status := 'End';
 							R_LOG_SP(v_module, v_operation, v_status);
+							GOTO CJH_START;
 					WHEN DUP_VAL_ON_INDEX 
 						THEN	
 							v_operation := 'Duplicated value on index';

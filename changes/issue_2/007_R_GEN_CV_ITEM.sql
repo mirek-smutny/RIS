@@ -45,6 +45,7 @@ PROCEDURE SP_GEN_CEH (pin_from NUMBER, pin_to NUMBER) IS
 	itr				NUMBER;
 	itr_tmp			NUMBER;
 	itr_null		NUMBER;
+	v_cnt			NUMBER;
 	v_module		VARCHAR(128);
 	v_operation		VARCHAR(128);
 	v_status		VARCHAR(128);
@@ -77,11 +78,12 @@ BEGIN
 	v_status := null;
 	R_LOG_SP(v_module, v_operation, v_status);
 
-
+	v_cnt := 0;
 	--- Cursor wrcv_c1 is for selecting Workers with CV where no education history has been created yet.
     FOR wrcv_rec IN wrcv_c1
     LOOP
 		BEGIN
+			
 			itr_null := 0;
 			--v_pin := wrcv_c1.PIN;
 			--v_operation := 'wrcv_rec loop';
@@ -249,7 +251,7 @@ BEGIN
 					
 					--v_operation := 'Generate school';
 					--v_status := 'Start';
-					R_LOG_SP(v_module, v_operation, v_status);
+					--R_LOG_SP(v_module, v_operation, v_status);
 					
 					SAVEPOINT start_edu;
 					-- Generate School
@@ -419,6 +421,7 @@ BEGIN
 					i_end => end_date, 
 					i_grad => grad_date);
 					
+				v_cnt := v_cnt + 1;
 					
 					--v_status := 'End';
 					--R_LOG_SP(v_module, v_operation, v_status);
@@ -433,6 +436,9 @@ BEGIN
 								ELSE
 									UPDATE R_WORKER SET STATUS = 'D' WHERE PIN = wrcv_rec.PIN;
 									COMMIT;
+									v_operation := 'End';
+									v_status := 'No data found' ;
+									R_LOG_SP(v_module, v_operation, v_status);
 									EXIT;
 								END IF;
         END;
@@ -447,8 +453,8 @@ BEGIN
 				EXIT;
 		END;
     END LOOP;	
-	v_operation := 'Start';
-	v_status := null;
+	v_operation := 'End';
+	v_status := 'Rows: ' || v_cnt ;
 	R_LOG_SP(v_module, v_operation, v_status);
 END;
 PROCEDURE SP_GEN_CJH (pin_from NUMBER, pin_to NUMBER) IS

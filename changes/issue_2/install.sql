@@ -27,8 +27,13 @@ SET SERVEROUTPUT ON SIZE 1000000;
 PROMPT ##############################################################
 PROMPT ################## R_FIND_COMPANY_BY_TOFI_MV #################
 @@001_R_FIND_COMPANY_BY_TOFI_MV.sql
+PROMPT ################## R_GEN_CV ##################################
+@@006_R_GEN_CV.sql
 PROMPT ################## R_GEN_CV_ITEM #############################
 @@007_R_GEN_CV_ITEM.sql
-
+PROMPT ################## R_GEN_WR_BY_ORG ###########################
+@@013_R_GEN_WR_BY_ORG_PCK.sql
+PROMPT ################## R_GENERATE ################################
+@@020_R_GENERATE.sql
 
 SPOOL OFF;

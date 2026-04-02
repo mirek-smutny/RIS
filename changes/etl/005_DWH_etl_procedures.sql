@@ -291,7 +291,7 @@ CREATE OR REPLACE PACKAGE BODY RIS_DWH.WT_CJH_1_ETL_PCK IS
         END LOOP;
         CLOSE load_curs;
             v_step := 'Merge';
-            v_status := 'Rows loaded: ' || stg_rows.COUNT;
+            v_status := 'Rows loaded: ' || v_cnt;
             RIS_DWH.DWH_LOG_SP(MODULE_IN=>c_module, OPERATION_IN=>c_operation, STEP_IN=>v_step, STATUS_IN=>v_status);
             
             v_step := null;

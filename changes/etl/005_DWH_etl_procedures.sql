@@ -52,7 +52,7 @@ CREATE OR REPLACE PACKAGE BODY RIS_DWH.WT_CJH_1_ETL_PCK IS
 
             EXECUTE IMMEDIATE 'TRUNCATE TABLE STG_WT_CV_JOB_HISTORY_1';
             v_cnt := 0;
-            
+
             OPEN wt_cjh_1_curs(PIN_FROM, PIN_TO, IN_START_DATE);
             LOOP
                 FETCH wt_cjh_1_curs BULK COLLECT INTO src_rows LIMIT 1000;
@@ -122,7 +122,7 @@ CREATE OR REPLACE PACKAGE BODY RIS_DWH.WT_CJH_1_ETL_PCK IS
             LOOP
                 FETCH stg_curs BULK COLLECT INTO stg_rows LIMIT 1000;
                 EXIT WHEN stg_rows.COUNT = 0;
-                
+
                 BEGIN
                     FORALL i IN 1..stg_rows.COUNT
                         INSERT INTO STG_WT_CV_JOB_HISTORY_1_READY
@@ -156,7 +156,7 @@ CREATE OR REPLACE PACKAGE BODY RIS_DWH.WT_CJH_1_ETL_PCK IS
                 END;
             END LOOP;
             CLOSE stg_curs;
-            
+
             v_step := null;
             v_status := 'End';
             RIS_DWH.DWH_LOG_SP(MODULE_IN=>c_module, OPERATION_IN=>c_operation, STEP_IN=>v_step, STATUS_IN=>v_status);
@@ -170,130 +170,70 @@ CREATE OR REPLACE PACKAGE BODY RIS_DWH.WT_CJH_1_ETL_PCK IS
         c_operation     CONSTANT VARCHAR2(128) := 'Load';
         v_step          VARCHAR(128);
         v_status        VARCHAR(256);
-        i               NUMBER;
         v_cnt           NUMBER;
-        CURSOR load_curs IS
-            SELECT
-                    ID,
-                    PIN,
-                    NAME,
-                    SURNAME,
-                    POSITION,
-                    START_DATE,
-                    END_DATE,
-                    CIN,
-                    COMPANY,
-                    ACTIVE,
-                    DURATION,
-                    EXPERIENCE_LENGHT,
-                    SENIORITY,
-                    PROCESSED
-                FROM
-                    STG_WT_CV_JOB_HISTORY_1_READY;
-        TYPE stg_type IS TABLE OF load_curs%ROWTYPE;
-        stg_rows stg_type;
-        TYPE target_row IS TABLE OF WT_CV_JOB_HISTORY_1%ROWTYPE;
-        target target_row;
         BEGIN
             v_step := null;
             v_status := 'Start';
             RIS_DWH.DWH_LOG_SP(MODULE_IN=>c_module, OPERATION_IN=>c_operation, STEP_IN=>v_step, STATUS_IN=>v_status);
-            v_cnt := 0;
-            OPEN load_curs;
-            LOOP
-                FETCH load_curs BULK COLLECT INTO stg_rows LIMIT 5000;
-                EXIT WHEN stg_rows.COUNT = 0;
-                v_cnt := v_cnt + stg_rows.COUNT;
-                FORALL i IN 1..stg_rows.COUNT
-                    MERGE INTO WT_CV_JOB_HISTORY_1 tgt
-                        USING(
-                            SELECT
-                                stg_rows(i).ID AS ID,
-                                stg_rows(i).PIN AS PIN,
-                                stg_rows(i).NAME AS NAME,
-                                stg_rows(i).SURNAME AS SURNAME,
-                                stg_rows(i).POSITION AS POSITION,
-                                stg_rows(i).START_DATE AS START_DATE,
-                                stg_rows(i).END_DATE AS END_DATE,
-                                stg_rows(i).CIN AS CIN,
-                                stg_rows(i).COMPANY AS COMPANY,
-                                stg_rows(i).ACTIVE AS ACTIVE,
-                                stg_rows(i).DURATION AS DURATION,
-                                stg_rows(i).EXPERIENCE_LENGHT AS EXPERIENCE_LENGHT,
-                                stg_rows(i).SENIORITY AS SENIORITY
-                            FROM dual) stg
-                                ON (tgt.ID = stg.ID)
-                WHEN MATCHED THEN
-                    UPDATE SET
-                        tgt.PIN = stg.PIN,
-                        tgt.NAME = stg.NAME,
-                        tgt.SURNAME = stg.SURNAME,
-                        tgt.POSITION = stg.POSITION,
-                        tgt.START_DATE = stg.START_DATE,
-                        tgt.END_DATE = stg.END_DATE,
-                        tgt.CIN = stg.CIN,
-                        tgt.COMPANY = stg.COMPANY,
-                        tgt.ACTIVE = stg.ACTIVE,
-                        tgt.DURATION = stg.DURATION,
-                        tgt.EXPERIENCE_LENGHT = stg.EXPERIENCE_LENGHT,
-                        tgt.SENIORITY = stg.SENIORITY
-                    WHERE
-                        tgt.ID = stg.ID
-                        OR tgt.PIN != stg.PIN
-                        OR tgt.NAME != stg.NAME
-                        OR tgt.SURNAME != stg.SURNAME
-                        OR tgt.POSITION != stg.POSITION
-                        OR tgt.START_DATE != stg.START_DATE
-                        OR tgt.END_DATE != stg.END_DATE
-                        OR tgt.CIN != stg.CIN
-                        OR tgt.COMPANY != stg.COMPANY
-                        OR tgt.ACTIVE != stg.ACTIVE
-                        OR tgt.DURATION != stg.DURATION
-                        OR tgt.EXPERIENCE_LENGHT != stg.EXPERIENCE_LENGHT
-                        OR tgt.SENIORITY != stg.SENIORITY
-                WHEN NOT MATCHED THEN
-                    INSERT (
-                        ID,
-                        PIN,
-                        NAME,
-                        SURNAME,
-                        POSITION,
-                        START_DATE,
-                        END_DATE,
-                        CIN,
-                        COMPANY,
-                        ACTIVE,
-                        DURATION,
-                        EXPERIENCE_LENGHT,
-                        SENIORITY
-                    )
-                    VALUES(
-                        stg_rows(i).ID,
-                        stg_rows(i).PIN,
-                        stg_rows(i).NAME,
-                        stg_rows(i).SURNAME,
-                        stg_rows(i).POSITION,
-                        stg_rows(i).START_DATE,
-                        stg_rows(i).END_DATE,
-                        stg_rows(i).CIN,
-                        stg_rows(i).COMPANY,
-                        stg_rows(i).ACTIVE,
-                        stg_rows(i).DURATION,
-                        stg_rows(i).EXPERIENCE_LENGHT,
-                        stg_rows(i).SENIORITY
-                    );
 
-                FORALL i IN 1..stg_rows.COUNT
-                    UPDATE STG_WT_CV_JOB_HISTORY_1_READY
-                        SET PROCESSED = 'Y'
-                        WHERE ID = stg_rows(i).ID;
-                COMMIT;
-        END LOOP;
-        CLOSE load_curs;
+            -- Deduplicate staging table - keep only latest record per ID
+            DELETE FROM STG_WT_CV_JOB_HISTORY_1_READY
+            WHERE ROWID NOT IN (
+                SELECT MAX(ROWID)
+                FROM STG_WT_CV_JOB_HISTORY_1_READY
+                WHERE PROCESSED = 'N'
+                GROUP BY ID
+            );
+
+            v_cnt := 0;
+            -- Single bulk MERGE against staging table
+            MERGE INTO WT_CV_JOB_HISTORY_1 tgt
+                USING (
+                    SELECT
+                        ID, PIN, NAME, SURNAME, POSITION,
+                        START_DATE, END_DATE, CIN, COMPANY,
+                        ACTIVE, DURATION, EXPERIENCE_LENGHT, SENIORITY
+                    FROM STG_WT_CV_JOB_HISTORY_1_READY
+                    WHERE PROCESSED = 'N'
+                ) stg
+                ON (tgt.ID = stg.ID)
+            WHEN MATCHED THEN
+                UPDATE SET
+                    tgt.PIN = stg.PIN,
+                    tgt.NAME = stg.NAME,
+                    tgt.SURNAME = stg.SURNAME,
+                    tgt.POSITION = stg.POSITION,
+                    tgt.START_DATE = stg.START_DATE,
+                    tgt.END_DATE = stg.END_DATE,
+                    tgt.CIN = stg.CIN,
+                    tgt.COMPANY = stg.COMPANY,
+                    tgt.ACTIVE = stg.ACTIVE,
+                    tgt.DURATION = stg.DURATION,
+                    tgt.EXPERIENCE_LENGHT = stg.EXPERIENCE_LENGHT,
+                    tgt.SENIORITY = stg.SENIORITY
+            WHEN NOT MATCHED THEN
+                INSERT (
+                    ID, PIN, NAME, SURNAME, POSITION,
+                    START_DATE, END_DATE, CIN, COMPANY,
+                    ACTIVE, DURATION, EXPERIENCE_LENGHT, SENIORITY
+                )
+                VALUES(
+                    stg.ID, stg.PIN, stg.NAME, stg.SURNAME, stg.POSITION,
+                    stg.START_DATE, stg.END_DATE, stg.CIN, stg.COMPANY,
+                    stg.ACTIVE, stg.DURATION, stg.EXPERIENCE_LENGHT, stg.SENIORITY
+                );
+
+            -- Mark all rows as processed
+            UPDATE STG_WT_CV_JOB_HISTORY_1_READY
+                SET PROCESSED = 'Y'
+                WHERE PROCESSED = 'N';
+            COMMIT;
+
+            SELECT COUNT(*) INTO v_cnt FROM WT_CV_JOB_HISTORY_1;
             v_step := 'Merge';
-            v_status := 'Rows loaded: ' || stg_rows.COUNT;
+            v_status := 'Rows loaded: ' || v_cnt;
             RIS_DWH.DWH_LOG_SP(MODULE_IN=>c_module, OPERATION_IN=>c_operation, STEP_IN=>v_step, STATUS_IN=>v_status);
-            
+
             v_step := null;
             v_status := 'End';
             RIS_DWH.DWH_LOG_SP(MODULE_IN=>c_module, OPERATION_IN=>c_operation, STEP_IN=>v_step, STATUS_IN=>v_status);
